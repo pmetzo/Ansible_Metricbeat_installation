@@ -1,0 +1,30 @@
+---
+- name: Installation des serveurs web
+  hosts: serveurs
+  remote_user: root
+  vars:
+    user123: metzo123
+
+  tasks:
+    - name: Installation des paquets
+      apt:
+        name:
+          - git
+          - htop
+          - vim
+        update_cache: yes
+        state: latest
+      become: yes
+    - name: Test Transfert de fichier
+      copy:
+        src: ressources/lorem.txt
+        dest: /home/vagrant/
+    - name: Tranfert et décompression de metricbeats
+      unarchive:
+        src: ressources/metricbeat-6.5.0-linux-x86_64.tar.gz
+        dest: /home/vagrant/test/
+    - name: Bare include (free-form)
+      include_vars: myvars.yml
+    - name: Creates directory
+      when: user is defined
+      file: path=/home/vagrant/{{ user }} state=directory

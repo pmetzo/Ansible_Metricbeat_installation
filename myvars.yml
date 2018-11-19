@@ -1,0 +1,16 @@
+---
+user: metzo
+password_kibana: passer
+install_metricbeats : "true"
+install_filebeats : "false"
+application_name : "orange_et_moi"
+perimetre_name : "nessico"
+hostname : "engine_deb"
+module_activated : ["apache","mysql"]
+workspace : "/home/vagrant/test"
+
+##### Conf ####
+enable_dashboard: "true"
+###### Output #####
+elastic_Output_Url : "192.168.1.8:9200"
+kibana_Output_Url : "192.168.1.8:5601"

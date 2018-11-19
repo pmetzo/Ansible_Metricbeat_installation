@@ -1,0 +1,9 @@
+Host 192.168.50.2
+  User vagrant
+  Port 22
+  UserKnownHostsFile /dev/null
+  StrictHostKeyChecking no
+  PasswordAuthentication no
+  IdentityFile /mnt/c/Users/Pro/Documents/vagrant/.vagrant/machines/default/virtualbox/private_key
+  IdentitiesOnly yes
+  LogLevel FATAL

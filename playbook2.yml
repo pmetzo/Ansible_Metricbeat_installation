@@ -1,0 +1,31 @@
+---
+- name: Installation des serveurs web
+  hosts: serveurs
+  remote_user: root
+
+  tasks:
+    - name: Include variable file (free-form)
+      include_vars: myvars.yml
+    - name: Creates directory
+      file: path=/home/vagrant/test state=directory
+    - name: Tranfert et décompression de metricbeats
+      unarchive:
+        src: ressources/metricbeat-6.5.0-linux-x86_64.tar.gz
+        dest: /home/vagrant/test/
+    - name: Chargement du template metricbeats.yml
+      template:
+        src: templates/metricbeat.yml.j2
+        dest: /home/vagrant/test/metricbeat-6.5.0-linux-x86_64/metricbeat.yml
+    - name: Activation des modules
+      shell: "./metricbeat modules enable {{ item }}"
+      with_items: "{{ module_activated }}"
+      args:
+        chdir: "{{ workspace }}/metricbeat-6.5.0-linux-x86_64/"
+    - name: Chargement des dashboards dans kibana
+      shell: "./metricbeat setup --dashboards"
+      args:
+        chdir: "{{ workspace }}/metricbeat-6.5.0-linux-x86_64/"
+    - name: Démarrage de métricbeat
+      shell: "nohup ./metricbeat run &"
+      args:
+        chdir: "{{ workspace }}/metricbeat-6.5.0-linux-x86_64/"

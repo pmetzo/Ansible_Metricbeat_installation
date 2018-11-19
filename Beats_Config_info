@@ -1,0 +1,24 @@
+Filebeats:
+Voulez vous installer filebeats ? (yes or no)
+Chemin des logs sous forme de liste yml un d'une liste classique
+Le nom de l'index ou la nomenclature
+
+MetricBeats:
+Voulez vous installer metricbeats ? (yes or no)
+Le nom de l'index ou la nomenclature
+Les modules à activer dans beats (Apache, docker, système, mysql...)
+
+
+Configuration du yml (output elastic, nom user elastic,password)
+Enable des modules (./metricbeat modules enable apache mysql)
+activation du dashboard
+renseigner le chemin de kibana (server.host dans kibana.yml)
+Ajout du dashboard (./metricbeat setup)
+Démarrage du service metric (sudo ./metricbeat -e -c metricbeat.yml)
+Ajout de metricbeat au Démarrage du système
+(A tester sur du Red Hat)
+
+
+Autoriser la connexion distant sur elasti et kibana
+Questions:
+Comment charger le dashboard de seulement les modules qui nous interressent ? et non tous les dashboard...
